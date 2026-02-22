@@ -212,14 +212,18 @@ function openAll(v1,v2,v3,v4,resumo){
   const pdfLinks = links.map(l=>{
     const id = l.match(/\/d\/([^\/]+)/)[1];
     const gid = l.match(/gid=([0-9]+)/)[1];
+
     return `https://docs.google.com/spreadsheets/d/${id}/export?format=pdf` +
            `&gid=${gid}` +
-           `&portrait=false` +   // 👈 PAISAGEM
+           `&portrait=false` +                 // 👈 paisagem
            `&size=A4` +
            `&fitw=true` +
-           `&sheetnames=false&printtitle=false&pagenumbers=true` +
-           `&gridlines=false&fzr=false` +
-           `&repeat_frozen_rows=true`;
+           `&sheetnames=true` +                // 👈 mostra nome da aba
+           `&printtitle=false` +
+           `&pagenumbers=false` +
+           `&gridlines=false` +
+           `&fzr=false` +
+           `&repeat_frozen_rows=true`;         // 👈 repete linhas congeladas
   });
 
   const html = `
@@ -227,7 +231,11 @@ function openAll(v1,v2,v3,v4,resumo){
   <head>
     <style>
       body{margin:0;}
-      embed{width:100%;height:100vh;page-break-after:always;}
+      embed{
+        width:100%;
+        height:100vh;
+        page-break-after:always;
+      }
     </style>
   </head>
   <body>
