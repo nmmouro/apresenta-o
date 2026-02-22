@@ -192,11 +192,12 @@ function renderCards(){
           <div class="month">${d.mes}</div>
           <div class="year">${d.ano}</div>
           <button onclick="openReport('${d.v1}')">V1</button>
+          <button onclick="openReport('${d.v11}')">V11</button>
           <button onclick="openReport('${d.v2}')">V2</button>
           <button onclick="openReport('${d.v3}')">V3</button>
           <button onclick="openReport('${d.v4}')">V4</button>
           <button onclick="openReport('${d.resumo}')">Resumo</button>
-          <button onclick="openAll('${d.v1}','${d.v2}','${d.v3}','${d.v4}','${d.resumo}')">PDF Geral</button>
+          <button onclick="openAll('${d.v1}', '${d.v11}','${d.v2}','${d.v3}','${d.v4}','${d.resumo}')">PDF Geral</button>
         </div>
       `;
     });
@@ -206,8 +207,8 @@ function openReport(link){
   document.getElementById("viewer").src = link;
 }
 
-function openAll(v1,v2,v3,v4,resumo){
-  const links=[v1,v2,v3,v4,resumo];
+function openAll(v1,v11,v2,v3,v4,resumo){
+  const links=[v1,v11,v2,v3,v4,resumo];
 
   const pdfLinks = links.map(l=>{
     const id = l.match(/\/d\/([^\/]+)/)[1];
@@ -263,10 +264,11 @@ async function load(){
       mes:formatCell(c[1]),
       mesIndex:getMonthIndex(formatCell(c[1])),
       v1:formatCell(c[2]),
-      v2:formatCell(c[3]),
-      v3:formatCell(c[4]),
-      v4:formatCell(c[5]),
-      resumo:formatCell(c[6])
+      v11:formatCell(c[3]),
+      v2:formatCell(c[4]),
+      v3:formatCell(c[5]),
+      v4:formatCell(c[6]),
+      resumo:formatCell(c[7])
     };
   });
 
