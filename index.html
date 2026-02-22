@@ -208,7 +208,27 @@ function openReport(link){
 
 function openAll(v1,v2,v3,v4,resumo){
   const links=[v1,v2,v3,v4,resumo];
-  const html = links.map(l=>`<iframe src="${l}" style="width:100%;height:100vh;"></iframe>`).join("");
+
+  const pdfLinks = links.map(l=>{
+    const id = l.match(/\/d\/([^\/]+)/)[1];
+    const gid = l.match(/gid=([0-9]+)/)[1];
+    return `https://docs.google.com/spreadsheets/d/${id}/export?format=pdf&gid=${gid}&portrait=true&size=A4&fitw=true`;
+  });
+
+  const html = `
+  <html>
+  <head>
+    <style>
+      body{margin:0;}
+      embed{width:100%;height:100vh;page-break-after:always;}
+    </style>
+  </head>
+  <body>
+    ${pdfLinks.map(p=>`<embed src="${p}" type="application/pdf">`).join("")}
+  </body>
+  </html>
+  `;
+
   const w = window.open();
   w.document.write(html);
   w.document.close();
