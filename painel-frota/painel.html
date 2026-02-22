@@ -54,7 +54,8 @@ function render(){
 }
 
 function openReport(link){
- document.getElementById("viewer").src=link;
+  alert("Link recebido:\n" + link);
+  document.getElementById("viewer").src = link;
 }
 
 async function load(){
@@ -81,5 +82,6 @@ load();
 </body>
 
 </html>
+
 
 
