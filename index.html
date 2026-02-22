@@ -212,7 +212,13 @@ function openAll(v1,v2,v3,v4,resumo){
   const pdfLinks = links.map(l=>{
     const id = l.match(/\/d\/([^\/]+)/)[1];
     const gid = l.match(/gid=([0-9]+)/)[1];
-    return `https://docs.google.com/spreadsheets/d/${id}/export?format=pdf&gid=${gid}&portrait=true&size=A4&fitw=true`;
+    return `https://docs.google.com/spreadsheets/d/${id}/export?format=pdf` +
+           `&gid=${gid}` +
+           `&portrait=false` +   // 👈 PAISAGEM
+           `&size=A4` +
+           `&fitw=true` +
+           `&sheetnames=false&printtitle=false&pagenumbers=false` +
+           `&gridlines=false&fzr=false`;
   });
 
   const html = `
