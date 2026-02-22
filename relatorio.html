@@ -23,8 +23,8 @@ const mes=params.get("mes");
 
 document.getElementById("titulo").innerText=`Relatório ${veiculo} - ${mes}/${ano}`;
 
-const SHEET_ID="SEU_ID_BASE_DADOS";
-const TAB_NAME="BASE";
+const SHEET_ID="https://docs.google.com/spreadsheets/d/1t3AHzKwC3ob6DxxeOEyTS8mOSvqpRH4Zqb4qxqE0bOM/edit?gid=0#gid=0";
+const TAB_NAME="RUV-RMV";
 
 const parseGviz=t=>JSON.parse(t.substring(t.indexOf("{"),t.lastIndexOf("}")+1));
 const formatCell=c=>c==null?"":(typeof c==="object"?(c.f??c.v??""):String(c));
