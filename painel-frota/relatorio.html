@@ -23,8 +23,8 @@ const mes=params.get("mes");
 
 document.getElementById("titulo").innerText=`Relatório ${veiculo} - ${mes}/${ano}`;
 
-const SHEET_ID="SEU_ID_BASE_DADOS";
-const TAB_NAME="BASE";
+const SHEET_ID="https://docs.google.com/spreadsheets/d/14T7zF0likp8YGeycOYBcOs9INY9gvMzpt7SMfghE8P4/edit?gid=1120944079#gid=1120944079";
+const TAB_NAME="RUV TXJ6F18";
 
 const parseGviz=t=>JSON.parse(t.substring(t.indexOf("{"),t.lastIndexOf("}")+1));
 const formatCell=c=>c==null?"":(typeof c==="object"?(c.f??c.v??""):String(c));
@@ -53,4 +53,5 @@ async function load(){
 load();
 </script>
 </body>
+
 </html>
