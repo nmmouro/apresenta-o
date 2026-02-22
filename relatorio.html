@@ -1,0 +1,48 @@
+<script>
+const SHEET_ID = "https://docs.google.com/spreadsheets/d/1t3AHzKwC3ob6DxxeOEyTS8mOSvqpRH4Zqb4qxqE0bOM/edit?gid=0#gid=0";
+const TAB = "RUV-RMV";
+
+const params = new URLSearchParams(location.search);
+const ano = params.get("ano");
+const mes = params.get("mes");
+const veiculo = params.get("veiculo"); // V1, V2, V3, V4 ou RESUMO
+
+function formatCell(c){
+  return c ? c.v.toString().trim() : "";
+}
+
+async function load(){
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${TAB}`;
+  const res = await fetch(url);
+  const txt = await res.text();
+  const json = JSON.parse(txt.substring(47, txt.length-2));
+  const rows = json.table.rows;
+
+  // acha a linha do ano e mês
+  const row = rows.find(r=>{
+    const c=r.c||[];
+    return formatCell(c[0])==ano && formatCell(c[1])==mes;
+  });
+
+  if(!row){
+    document.body.innerHTML="Relatório não encontrado";
+    return;
+  }
+
+  // escolhe a coluna conforme V1,V2...
+  let colIndex;
+  if(veiculo=="V1") colIndex=2;
+  if(veiculo=="V2") colIndex=3;
+  if(veiculo=="V3") colIndex=4;
+  if(veiculo=="V4") colIndex=5;
+  if(veiculo=="RESUMO") colIndex=6;
+
+  const link = formatCell(row.c[colIndex]);
+
+  document.getElementById("frame").src = link;
+}
+
+load();
+</script>
+
+<iframe id="frame" style="width:100%;height:90vh;border:none"></iframe>
