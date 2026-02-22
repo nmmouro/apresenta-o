@@ -37,24 +37,31 @@ function getMonthIndex(m){
  return months.indexOf(m.toLowerCase());
 }
 
-function render(){
- const box=document.getElementById("cards");
- box.innerHTML="";
- allData.forEach(d=>{
-  box.innerHTML+=`
-   <div class="month-card">
-    <b>${d.mes} ${d.ano}</b><br>
-    <button onclick="openReport('${CRETA TXJ6F18}')">CRETA TXJ6F18</button>
-    <button onclick="openReport('${d.v2}')">V2</button>
-    <button onclick="openReport('${d.v3}')">V3</button>
-    <button onclick="openReport('${d.v4}')">V4</button>
-    <button onclick="openReport('${d.resumo}')">Resumo</button>
-   </div>`;
- });
+function renderCards(){
+  const box = document.getElementById("cards");
+  box.innerHTML = "";
+
+  allData.forEach(d=>{
+    box.innerHTML += `
+      <div class="month-card">
+        <div class="month">${d.mes} ${d.ano}</div>
+        <div style="margin-top:8px">
+          <button onclick="openReport(${JSON.stringify(d.v1)})">V1</button>
+          <button onclick="openReport(${JSON.stringify(d.v2)})">V2</button>
+          <button onclick="openReport(${JSON.stringify(d.v3)})">V3</button>
+          <button onclick="openReport(${JSON.stringify(d.v4)})">V4</button>
+          <button onclick="openReport(${JSON.stringify(d.resumo)})">Resumo</button>
+        </div>
+      </div>
+    `;
+  });
 }
 
 function openReport(link){
-  alert("Link recebido:\n" + link);
+  if(!link){
+    alert("Nenhum link cadastrado para este item.");
+    return;
+  }
   document.getElementById("viewer").src = link;
 }
 
@@ -82,6 +89,7 @@ load();
 </body>
 
 </html>
+
 
 
 
